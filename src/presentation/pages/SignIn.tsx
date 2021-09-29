@@ -4,7 +4,7 @@ import { Web3Context } from '../contexts'
 import { LogoIcon } from '../components'
 
 export const SignIn: React.FC = () => {
-  const { hasMetamask, connectAccount } = useContext(Web3Context)
+  const { hasMetamask, connectWallet } = useContext(Web3Context)
 
   return (
     <Layout.Content>
@@ -21,7 +21,7 @@ export const SignIn: React.FC = () => {
                 <Button
                   type="primary"
                   size="large"
-                  onClick={async () => await connectAccount()}
+                  onClick={async () => await connectWallet()}
                   block
                   disabled={!hasMetamask}
                 >

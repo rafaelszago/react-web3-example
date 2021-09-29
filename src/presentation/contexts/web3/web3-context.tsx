@@ -9,8 +9,9 @@ export const Web3Context = createContext<Web3ContextData>({} as Web3ContextData)
 
 export const Web3Provider: React.FC<Web3ProviderProps> = ({
   children,
-  web3GetAccount,
-  ethereumRequireChain
+  ethereumRequireChain,
+  web3ConnectWallet,
+  web3GetAccount
 }: Web3ProviderProps) => {
   const [account, setAccount] = useState<AccountModel>(null)
   const [connected, setConnected] = useState<boolean>(false)
@@ -19,6 +20,11 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({
   const loadData = useCallback(async () => {
     await ethereumRequireChain.require({ chainName: 'localhost' })
   }, [ethereumRequireChain])
+
+  const connectWallet = useCallback(async () => {
+    const isConnected = await web3ConnectWallet.connect()
+    setConnected(isConnected)
+  }, [web3ConnectWallet])
 
   useEffect(() => {
     if (!window.ethereum) {
@@ -30,7 +36,9 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({
   }, [])
 
   return (
-    <Web3Context.Provider value={{ account, connected, hasMetamask }}>
+    <Web3Context.Provider
+      value={{ account, connected, hasMetamask, connectWallet }}
+    >
       {children}
     </Web3Context.Provider>
   )
