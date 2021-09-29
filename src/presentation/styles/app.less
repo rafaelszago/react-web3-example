@@ -1,0 +1,31 @@
+@import '~antd/dist/antd.dark.less';
+@import './_variables.less';
+
+.wallet-badge {
+  max-height: 42px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  border: 1px solid @layout-body-background;
+  border-radius: 8px;
+
+  .value,
+  .address {
+    margin: 0;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    height: 42px;
+  }
+  .address-icon {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+  }
+  .address {
+    background-color: @layout-body-background;
+  }
+}
